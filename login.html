@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/login.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900"
+        rel="stylesheet" />
+</head>
+
+<body>
+    <section class="login">
+        <div class="login__form">
+            <div class="login__wrapper">
+                <div class="login__form-text">
+                    <h1 class="login__form-header">
+                        Olá, tudo bem? 👋
+                    </h1>
+                    <div class="login__form-secondary">
+                        Vamos decolar para grandes dias de vendas.
+                    </div>    
+                </div>
+    
+                <div class="login__form-wrapper">
+                    <form class="login__form-input">
+                        <label class="login__form-name" for="email">
+                            Seu E-mail
+                        </label>
+                        <input class="login__form-email" type="email" name="email" placeholder="exemplo@email.com">
+                        <span class="error-message"></span>
+    
+                        <label class="login__form-name" for="password">
+                            Sua Senha
+                        </label>
+                        <div class="login__form-password-wrapper">
+                            <input class="login__form-password" type="password" name="password" placeholder="Digite sua senha">
+                            <svg class="login__form-svg" width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15.3127 15.313C15.0131 15.6345 14.6518 15.8924 14.2503 16.0713C13.8489 16.2502 13.4155 16.3464 12.9761 16.3541C12.5367 16.3619 12.1002 16.281 11.6927 16.1164C11.2852 15.9518 10.915 15.7068 10.6042 15.3961C10.2934 15.0853 10.0484 14.7151 9.88383 14.3076C9.71923 13.9001 9.63839 13.4636 9.64615 13.0242C9.6539 12.5847 9.75008 12.1514 9.92896 11.7499C10.1078 11.3484 10.3657 10.9871 10.6873 10.6875M19.48 19.4803C17.6152 20.9017 15.3445 21.6892 13 21.7275C5.36364 21.7275 1 13.0002 1 13.0002C2.35697 10.4714 4.23906 8.262 6.52 6.52025L19.48 19.4803ZM10.7091 4.53479C11.46 4.35903 12.2288 4.27116 13 4.27298C20.6364 4.27298 25 13.0002 25 13.0002C24.3378 14.2391 23.5481 15.4054 22.6436 16.4802L10.7091 4.53479Z" stroke="#425DC7" stroke-width="1.5"/>
+                                <path d="M1 1L25 25" stroke="#142159" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+                            
+                        <div class="login__form-options">
+                            <label class="login__form-connected">
+                                <input type="checkbox" class="login__form-checkbox" />
+                                Manter conectado
+                            </label>
+                            <a href="#" class="login__form-forgot">
+                                Esqueci minha senha
+                            </a>    
+                        </div>   
+                        
+                        <button type="submit" class="login__form-button">Entrar</button>    
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</body>
+<script src="assets/scripts/login.js"></script>
+
+</html>
