@@ -2,6 +2,7 @@ const API_USER = "https://test-final.b8one.academy/user";
 const API_PROD = "https://test-final.b8one.academy/products/more-sold";
 const API_SALES = "https://test-final.b8one.academy/sales";
 const API_MENU = "https://test-final.b8one.academy/menu";
+const API_RESELL = "https://test-final.b8one.academy/resellers/ranking";
 
 // api . user
 async function fetchUser() {
@@ -11,19 +12,24 @@ async function fetchUser() {
 }
 
 function populateUsers(currentUser, currentIndex) {
-  const userOrg = document.querySelector(".header__name-whole")
+  const userOrg = document.querySelector(".header__name-whole");
   userOrg.innerHTML = currentUser.organization;
 
   const userName = document.querySelector(".header__nav-name");
   userName.innerHTML = currentUser.username;
 
-  // const userPhoto = document.querySelector(".");
-  // userPhoto.innerHTML = `<img class="header__nav-img" referrer-policy="no-referrer" src="${currentUser.photo}" />`
+  const userPhoto = document.querySelector(".header__user-img");
+  userPhoto.innerHTML = `<img class="header__nav-img" referrer-policy="no-referrer" src="${currentUser.photo}" />`;
 
+  const userOrgInitials = document.querySelector(".header__initials");
+  userOrgInitials.innerHTML = `<img referrer-policy="no-referrer" src="https://ui-avatars.com/api/?name=${currentUser.organization}&rounded=true&format=svg&background=F1F2F9&color=425DC7&size=32&bold=true" />`
+
+  const nameNotif = currentUser.username.split(' ').slice(0, 1).join(' ');
+  const userNotif = document.querySelector(".header__user-link-span")
+  userNotif.innerHTML = `Olá, <span class="span__user">${nameNotif}</span> 👋 `
 }
 
 // api . products
-
 async function fetchProducts() {
   const responseProd = await fetch(API_PROD);
   const responseJsonProd = await responseProd.json();
@@ -33,16 +39,20 @@ async function fetchProducts() {
 function populateProducts(products) {
   const productsListUl = document.querySelector(".js-insights__table");
   const productsHtmlArray = products.map((product, index) => {
+
+    const price = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(product.price/100);
+
     return `
             <ul class="insights__table-row">
               <div class="insights-left">
+              <li class="table-number">${index+1}</li>
               <li class="insights__table-row__item table-image"><img referrer-policy="no-referrer" src="${product.image}" /></li>
               <li class="insights__table-row__item table-product">${product.name}</li>
               </div>
               <div class="insights-right">
               <li class="insights__table-row__item table-order">${product.orderId}</li>
               <li class="insights__table-row__item table-department">${product.department}</li>
-              <li class="insights__table-row__item table-value">R$ ${product.price}</li>
+              <li class="insights__table-row__item table-value">${price}</li>
               <div>
             </ul>
           `;
@@ -56,6 +66,9 @@ function populateProducts(products) {
 function populateProductsMobile(productsMobile) {
   const productListMobile = document.querySelector(".table__mobile-wrapper");
   const productsHtmlArrayMobile = productsMobile.map((product, index) => {
+
+    const price = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(product.price/100);
+
     return `
             <ul class="insights__table-row-mobile">
               <div class="table__mobile-top">
@@ -66,7 +79,7 @@ function populateProductsMobile(productsMobile) {
               <div class="table__mobile-bottom">
                 <li class="insights__table-row__item-mobile table-number">1</li>
                 <li class="insights__table-row__item-mobile table-order-mobile">${product.orderId}</li>
-                <li class="insights__table-row__item-mobile table-value-mobile">R$ ${product.price}</li>
+                <li class="insights__table-row__item-mobile table-value-mobile"> ${price}</li>
               </div>
             </ul>
     `;
@@ -85,37 +98,75 @@ async function fetchSales() {
 }
 
 function populateSales(currentSales, currentIndex) {
+  const salesRevenue = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(currentSales.revenues/100);
+  const averageTicket = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(currentSales.averageTicket/100);
+
+
   const salesFaturamento = document.querySelector(".card__faturamento-valor");
-  salesFaturamento.innerHTML = currentSales.revenues;
+  salesFaturamento.innerHTML = salesRevenue;
 
   const salesVendas = document.querySelector(".card__vendas-valor");
   salesVendas.innerHTML = currentSales.totalSales;
 
   const salesTicket = document.querySelector(".card__ticket-valor");
-  salesTicket.innerHTML = currentSales.averageTicket;
+  salesTicket.innerHTML = averageTicket;
 }
 
-// api. menu 
-// async function fetchMenu() {
-//   const responseMenu = await fetch(API_MENU);
-//   const responseMenuJson = await responseMenu.json();
-//   return responseMenuJson;
-// }
+// api . menu
+async function fetchMenu() {
+  const responseMenu = await fetch(API_MENU);
+  const responseMenuJson = await responseMenu.json();
+  return responseMenuJson;
+}
 
-// function populateMenu(menu) {
-//   const menuList = document.querySelector(".js-insights__table");
-//   const menuHtmlArray = menu.map((menuArray, index) => {
-//     return `
+function populateMenu(menu, currentIndex) {
+  const menuPosition = menu.menuTree[currentIndex];
+
+  const menuResumo = document.querySelector(".accordion-resumo");
+  menuResumo.innerHTML = menuPosition;
+}
 
 
-//     `;
-//   });
+// api . resellers
+async function fetchResellers() {
+  const responseRanking = await fetch(API_RESELL);
+  const responseJsonRank = await responseRanking.json();
+  return responseJsonRank;
+}
 
-//   const menuHtml = productsHtmlArray.join(" ");
-//   menuList.insertAdjacentHTML("beforeend", menuHtml);
-// }
+function populateResellers(resell) {
+  const resellerListUl = document.querySelector(".ranking-scroll");
+  const resellerHtmlArray = resell.map((resellers, index) => {
+    return `
+            <div class="ranking-cell">
+              <div class="ranking-number">${index+1}°</div>
+              <div class="ranking-photo"><img referrer-policy="no-referrer" src="https://ui-avatars.com/api/?name=${resellers.name}&rounded=true&format=svg&background=F1F2F9&color=425DC7&size=40" /></div>          
+            
+              <div class="ranking-name">
+                <div class="ranking-name_header">${resellers.name}</div>
+                <div class="ranking-numbers">
+                  <div class="ranking-orders">${resellers.ordersCount} pedidos</div>
+                  <div class="ranking-position">${resellers.percentage}
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10.9998 9.5L7.99976 6.5L4.99976 9.5"
+                            stroke="#158F2E" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+`;
+  });
+
+  const resellerHtml = resellerHtmlArray.join(" ");
+  resellerListUl.insertAdjacentHTML("beforeend", resellerHtml);
+}
+
 
 // gráfico . 01
+
 const ctx = document.getElementById("myChart").getContext("2d");
 const labels = [
   "06/10/21",
@@ -363,8 +414,9 @@ const config3 = {
 const myChart3 = new Chart(ctx3, config3);
 
 // active
+
 function tabActive() {
-  let btns = document.getElementsByClassName("main__report-link");
+  let btns = document.getElementsByClassName("report-tab");
 
   for (let i = 0; i < btns.length; i++) {
     btns[i].addEventListener("click", function () {
@@ -417,12 +469,17 @@ async function populate() {
   const dataProd = await fetchProducts();
   const dataUser = await fetchUser();
   const dataSales = await fetchSales();
+  const dataResell = await fetchResellers();
+  const dataMenu = await fetchMenu();
 
   populateProducts(dataProd.products);
   populateProductsMobile(dataProd.products);
   populateUsers(dataUser);
   populateSales(dataSales);
+  populateResellers(dataResell.resellers);
+  populateMenu(dataMenu.menuTree);
 }
+
 function activeClasses() {
   tabActive();
   buttonActive();
