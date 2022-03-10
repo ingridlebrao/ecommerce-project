@@ -21,22 +21,31 @@ class Login {
       console.log("Email", email);
       console.log("Password", password);
 
-      this.getData(email, password);
-    //   const data = 
+      values.getData(email, password);
     });
   }
 
   async getData(email, password) {
-    const response = await fetch("http://172.20.10.10:3000/login", {
+    const response = await fetch("https://test-final.b8one.academy/login", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      method: "POST",
-      body: JSON.stringify({ email, password }),
-    }).then((data) => data.json());
+      body: JSON.stringify({
+        "email": email,
+        "password": password,
+      }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+      });
 
     return response;
   }
 }
 
 new Login();
+
