@@ -92,14 +92,24 @@ input[type="password"]::placeholder {
   line-height: 24px;
 }
 
+.error-message {
+  display: none;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #f03460;
+  margin-bottom: 8px;
+}
+
 .login__form-password-wrapper {
   position: relative;
 }
 
-.login__form-svg {
+.login__eye,
+.toggleInput {
   position: absolute;
-  right: 20px;
-  top: calc(50% - 26px / 2);
+  right: 12px;
+  top: calc(50% - 24px / 2);
 }
 
 .login__form-options {
@@ -173,20 +183,19 @@ input[type="password"]::placeholder {
   }
 
   .login__form-header {
-      width: 296px;
+    width: 296px;
     font-weight: 600;
     font-size: 24px;
     line-height: 32px;
     text-align: center;
-
   }
+
   .login__form-secondary {
-      max-width: 296px;
+    max-width: 296px;
     font-weight: 500;
     font-size: 20px;
     line-height: 24px;
     text-align: center;
-
   }
 
   .login__wrapper {
@@ -196,7 +205,7 @@ input[type="password"]::placeholder {
     top: 5px;
   }
 
-  .login__form-svg {
+  .login__eye {
     right: -50px;
   }
 
@@ -204,11 +213,10 @@ input[type="password"]::placeholder {
     max-width: 296px;
     white-space: nowrap;
     gap: 7px;
-
   }
 
   .login__form-button {
-      max-width: 296px;
+    max-width: 296px;
   }
 
   .login__form-email,

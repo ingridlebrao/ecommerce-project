@@ -3,6 +3,7 @@ class Login {
     this.form = ".login__form-input";
     this.emailInput = ".login__form-email";
     this.passInput = ".login__form-password";
+    this.spanLogin = ".error-message";
     this.validateOnSubmit();
   }
 
@@ -26,6 +27,9 @@ class Login {
   }
 
   async getData(email, password) {
+    const input = document.querySelector(".login__form-email");
+    const spanError = document.querySelector(".error-message");
+
     const response = await fetch("https://test-final.b8one.academy/login", {
       method: "POST",
       headers: {
@@ -41,11 +45,35 @@ class Login {
       })
       .then((data) => {
         console.log(data);
-      });
 
-    return response;
+        if(data === true){
+          window.location.href = "index.html";
+        } else {
+          input.style.borderColor="#F03460";
+          input.style.borderWidth = "2px";
+          spanError.style.display="block";
+      }
+
+      });
   }
+
 }
 
 new Login();
 
+function togglePassword() {
+  const inputButton = document.querySelector(".toggleInput")
+  const inputPassword = document.getElementById("togglePassword");
+
+  inputButton.addEventListener("click", () => {
+    const type = inputPassword.getAttribute('type');
+    inputPassword.setAttribute('type', type === "password" ? "text" : "password");
+    });
+
+}
+
+function main () {
+  togglePassword();
+} 
+
+main();
