@@ -19,7 +19,7 @@ function populateUsers(currentUser) {
   userName.innerHTML = currentUser.username;
 
   const userPhoto = document.querySelector(".header__user-img");
-  userPhoto.innerHTML = `<img class="header__nav-img" referrer-policy="no-referrer" src="${currentUser.photo}" />`;
+  userPhoto.innerHTML = `<img class="header__nav-img" referrerpolicy="no-referrer" src="${currentUser.photo}" />`;
 
   const userOrgInitials = document.querySelector(".header__initials");
   userOrgInitials.innerHTML = `<img referrer-policy="no-referrer" src="https://ui-avatars.com/api/?name=${currentUser.organization}&rounded=true&format=svg&background=F1F2F9&color=425DC7&size=32&bold=true" />`;

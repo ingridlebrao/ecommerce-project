@@ -105,6 +105,19 @@ input[type="password"]::placeholder {
   position: relative;
 }
 
+
+.toggleInput {
+  display: none;
+}
+
+input[type="password"] ~ #toggle-eye-slash {
+  display: block;
+}
+
+input[type="text"] ~ #toggle-eye {
+  display: block;
+}
+
 .login__eye,
 .toggleInput {
   position: absolute;

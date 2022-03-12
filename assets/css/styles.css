@@ -1142,7 +1142,6 @@ canvas#myChart-3 {
   max-height: 244px;
   height: 100%;
   max-width: 292px;
-  width: 100%;
   overflow-y: scroll;
   margin-top: 24px;
 }
@@ -1791,6 +1790,7 @@ canvas#myChart-3 {
   #menu {
     display: block;
     padding: 9vh 20px 20px 40px;
+    box-shadow: 2px 2px 24px 2px rgb(0 0 0 / 20%);
   }
 
   .chart-container {
@@ -1816,7 +1816,7 @@ canvas#myChart-3 {
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
   }
 
   .ranking-name {

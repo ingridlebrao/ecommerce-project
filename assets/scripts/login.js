@@ -62,13 +62,15 @@ class Login {
 new Login();
 
 function togglePassword() {
-  const inputButton = document.querySelector(".toggleInput")
-  const inputPassword = document.getElementById("togglePassword");
+  const inputButton = document.querySelectorAll(".toggleInput");
 
-  inputButton.addEventListener("click", () => {
-    const type = inputPassword.getAttribute('type');
-    inputPassword.setAttribute('type', type === "password" ? "text" : "password");
-    });
+  [...inputButton].map(input => {
+    input.addEventListener("click", () => {
+      const inputPassword = document.getElementById("togglePassword");
+      const type = inputPassword.getAttribute('type');
+      inputPassword.setAttribute('type', type === "password" ? "text" : "password");
+      });
+  })
 
 }
 
